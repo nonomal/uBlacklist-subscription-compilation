@@ -1,68 +1,102 @@
 # uBlacklist subscription compilation
+
 > uBlacklist 订阅地址合集
 
-![Update uBlacklist subcription weekly](https://github.com/eallion/uBlacklist-subscription-compilation/workflows/Update%20uBlacklist%20subcription%20weekly/badge.svg?branch=main) ![Visitors](https://visitor-badge.laobi.icu/badge?page_id=eallion.uBlacklist-subscription-compilation)
+![Update uBlacklist subcription weekly](https://github.com/eallion/uBlacklist-subscription-compilation/workflows/Update%20uBlacklist%20subcription%20weekly/badge.svg?branch=main)
+[![GitHub issues](https://img.shields.io/github/issues/eallion/uBlacklist-subscription-compilation?logo=GitHub&color=4ec100&style=flat)](https://github.com/eallion/uBlacklist-subscription-compilation/issues/new/choose) ![Visitors](https://visitor-badge.laobi.icu/badge?page_id=eallion.uBlacklist-subscription-compilation)
 
-这是一个 uBlacklist 订阅地址合集，搜集了网上大部分的订阅地址合并成一个。  
-通过 [Github Actions](https://github.com/eallion/uBlacklist-subscription-compilation/actions) 每周自动更新一次。
+> 订阅源地址：`https://git.io/ublacklist`  
 
-本列表**比较激进**！会屏蔽少部分正规但低质量的中文网站。  
-所以个人建议搜索中文资料请用百度，uBlacklist 插件对百度无效。
-> 如果需要百度屏蔽插件请用：[Search engine filter](https://github.com/zhangolve/search-engine-filter)
+这是一个 uBlacklist 插件的订阅地址合集，搜集了网上大部分的订阅地址合并成一个。  
+通过 [Github Actions](https://github.com/eallion/uBlacklist-subscription-compilation/actions/workflows/go.yml) 每周自动更新一次。
 
-# 功能
+### 功能
 
-通过匹配域名的方式，屏蔽搜索引擎的搜索结果。主要是屏蔽中文 SEO 垃圾站。  
+#### 🧱 **屏蔽中文内容农场！**
 
-支持的搜索引擎：（由 uBlacklist 插件决定）
-- [Google](https://www.google.com/ncr?gws_rd=ssl)
-- [Bing](https://www.bing.com/)
-- [DuckDuckGo](https://duckduckgo.com/)
-- [Ecosia](https://www.ecosia.org/)
-- [Startpage](https://www.startpage.com/)
+【什么是[内容农场](https://zh.wikipedia.org/wiki/%E5%85%A7%E5%AE%B9%E8%BE%B2%E5%A0%B4)？】
 
-# 用法：
+通过匹配域名的方式，屏蔽搜索引擎的搜索结果。  
+主要是屏蔽中文 SEO 垃圾站，如机器翻译、AI 生成的内容……  
 
-### 一、下载 uBlacklist 浏览器插件：
-- Chrome： <https://chrome.google.com/webstore/detail/ublacklist/pncfbmialoiaghdehhbnbhkkgmjanfhe>
-- Firefox： <https://addons.mozilla.org/en-US/firefox/addon/ublacklist/>
-- Edge：<https://chrome.google.com/webstore/detail/ublacklist/pncfbmialoiaghdehhbnbhkkgmjanfhe>
-- Safari (macOS / iOS)：<https://apps.apple.com/us/app/ublacklist-for-safari/id1547912640>
+#### 🔍️ 支持的搜索引擎（由 [uBlacklist](https://github.com/iorate/ublacklist) 插件决定）
 
-### 二、设置插件
+此扩展支持以下搜索引擎
 
-#### 设置 - 订阅：
+|              | Web                | Images             | Videos             | News               |
+| ------------ | ------------------ | ------------------ | ------------------ | ------------------ |
+| Google       | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: |
+| Bing         | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: |
+| Brave \*3    | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: |
+| DuckDuckGo   | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: |
+| Ecosia       | :heavy_check_mark: |                    |                    |                    |
+| Kagi         | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: |
+| Qwant        | :heavy_check_mark: | :heavy_check_mark: | \*1                | :heavy_check_mark: |
+| SearX \*2    | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: |
+| Startpage    | :heavy_check_mark: |                    | :heavy_check_mark: | :heavy_check_mark: |
+| Yahoo! JAPAN | :heavy_check_mark: |                    |                    |                    |
+| Yandex       | :heavy_check_mark: |                    |                    |                    |
+
+\*1 仅当 "Always play videos on Qwant.com" 关闭时<br>
+\*2 仅支持某些公共实例，如果您想将自己的 SearX/SearXNG 添加到支持列表，你需要前往`src/common/search-engines.ts`，并手动将您的搜索引擎添加到列表中，然后手动进行构建。<br>
+\*3 由于获取图片链接的完整 URL 比较困难，此扩展程序不支持 Brave Image Search 中按子域名进行拦截。（例如，如果链接指向 `www.example.com`，则会拦截整个 `example.com`）。
+
+### 用法
+
+#### ⬇️ 下载 uBlacklist 浏览器插件
+
+- Chrome: [Chrome Web Store](https://chrome.google.com/webstore/detail/ublacklist/pncfbmialoiaghdehhbnbhkkgmjanfhe)
+- Firefox: [Firefox Add-ons](https://addons.mozilla.org/en-US/firefox/addon/ublacklist/)
+- Safari (macOS / iOS): [App Store](https://apps.apple.com/us/app/ublacklist-for-safari/id1547912640)
+- Edge*: [Chrome Web Store](https://chrome.google.com/webstore/detail/ublacklist/pncfbmialoiaghdehhbnbhkkgmjanfhe)
+
+#### 🔧 设置插件
+
+##### 1. 设置 - 订阅
 
 > 订阅黑名单列表：
 
-添加订阅：  
-选择一个列表添加到 Subscription 订阅中：（如下图所示）
+添加订阅：
 
-- GitHub 列表（大陆部分地区可能被墙或者速度慢）
+- 订阅源地址：`https://git.io/ublacklist`  
 
-`https://git.io/ublacklist`  
-`https://git.io/ublocklist` # For BLM
+<blockquote>
+<details>
+    <summary>【👉点击展示】订阅链接内容</summary>
+<br />
 
-- CDN 加速列表
+`https://git.io/ublacklist` 的完整内容如下：
 
-`https://cdn.jsdelivr.net/gh/eallion/uBlacklist-subscription-compilation@main/uBlacklist.txt`
-`https://cdn.jsdelivr.net/gh/eallion/uBlacklist-subscription-compilation@main/uBlocklist.txt` # For BLM
+```bash
+# curl -I https://git.io/ublacklist
 
-上面 4 个列表的内容一模一样，任意选择一个即可。
-
-**能稳定访问 GitHub 的用户推荐使用：**  
+# HTTP/1.1 301 Moved Permanently
+# cache-control: public, max-age=31536000, immutable
+# x-lru-cache: HIT
+location: https://raw.githubusercontent.com/eallion/uBlacklist-subscription-compilation/main/uBlacklist.txt
+# content-length: 0
+# date: 
+# x-github-backend: Kubernetes
+# x-github-request-id: 
 ```
-https://git.io/ublacklist
+
+复制订阅长链接：
+
+```bash
+https://raw.githubusercontent.com/eallion/uBlacklist-subscription-compilation/main/uBlacklist.txt
 ```
-> <https://git.io/ublacklist>
 
-示例图：
+</details>
 
-![](https://cdn.jsdelivr.net/gh/eallion/uBlacklist-subscription-compilation@main/tools/x2yWi62OWl.png)
+</blockquote>
 
-#### 设置 - 一般：（选填）
+如下图所示：（先点`添加订阅`）
 
->以下网站将不会显示在 Google 的搜索结果中：
+![](tools/x2yWi62OWl.png)
+
+##### 2. 设置 - 常规：（选填）
+
+> 在谷歌的搜索结果中将不会显示以下网站：
 
 ```
 *://*/so.php
@@ -72,47 +106,75 @@ https://git.io/ublacklist
 *://*/?s=*
 *://*/so/*
 ```
-如图：
 
-![](https://cdn.jsdelivr.net/gh/eallion/uBlacklist-subscription-compilation@main/tools/PKO0JoJBpU.png)
+屏蔽 AI 内容农场：
 
-# 添加/删除 域名
+> 来自：https://github.com/laylavish/uBlockOrigin-HUGE-AI-Blocklist?tab=readme-ov-file#ublacklist-1
 
-1. 添加需要屏蔽的域名：
+```
+/(generative)? *AI *(art|generated|illustration)?/i
+/(ada)?Lo(RA|Con) *(model)?|(stable)?.*diffusion|midjourney|niji|sd *(xl|1.5)|(text|txt|img|image) *(to|2) *(image|img|video)/i
+```
 
-- <https://github.com/eallion/uBlacklist-subscription-compilation/issues/4>
-- <https://github.com/eallion/uBlacklist-subscription-compilation/discussions/categories/addurl>
+### 添加/删除 域名
 
-2. 需要解除屏蔽的域名：
+##### 1. 插件设置
 
-- <https://github.com/eallion/uBlacklist-subscription-compilation/issues/5>
-- <https://github.com/eallion/uBlacklist-subscription-compilation/discussions/categories/reverseurl>
+少量域名，请在自己浏览器插件的 `常规` 设置中添加即可，在行首添加 `@` 符号可取消屏蔽：
 
-# 感谢名单：
+```
+# 加入屏蔽
+*://*.baidu.com/*
 
-uBlacklist: 
+# 取消屏蔽
+@*://*.baidu.com/*
+```
+
+##### 2. 提交 URL
+
+如有需求添加、删除域名，请至 [eallion/uBlacklist-Subscription](https://github.com/eallion/uBlacklist-Subscription) 提交 PR。  
+
+### 感谢名单
+
+uBlacklist:
+
 - [https://github.com/iorate/uBlacklist](https://github.com/iorate/uBlacklist)
+
+Contribution:
+
+- https://github.com/eallion/uBlacklist-Subscription.git
 
 Subscription:
 
-- [https://github.com/iorate/ublacklist-example-subscription](https://github.com/iorate/ublacklist-example-subscription)
+> 添加订阅源的时候，各订阅源均采用 Mit License 或无 License。如果有侵权行为，我会第一时间删除。
 
-- [https://github.com/YeSilin/uBlacklist](https://github.com/YeSilin/uBlacklist)
-- [https://github.com/cobaltdisco/Google-Chinese-Results-Blocklist](https://github.com/cobaltdisco/Google-Chinese-Results-Blocklist)
-- [https://github.com/gyli/Blocklist](https://github.com/gyli/Blocklist)
-- [https://github.com/h-matsuo/uBlacklist-subscription-for-developer](https://github.com/h-matsuo/uBlacklist-subscription-for-developer)
-- [https://github.com/littleserendipity/uBlacklist-Subscription](https://github.com/littleserendipity/uBlacklist-Subscription)
-- [https://github.com/liubiantao/uBlacklist-Websites](https://github.com/liubiantao/uBlacklist-Websites)
-- [https://github.com/nonPointer/uBlacklist-Subscription](https://github.com/nonPointer/uBlacklist-Subscription)
-- [https://github.com/scyrte/uBlacklist-Subscription](https://github.com/scyrte/uBlacklist-Subscription)
-- [https://github.com/xNathan/uBlacklist-subscription](https://github.com/xNathan/uBlacklist-subscription)
-- [https://github.com/yangjingchuang/ublacklist-subscription](https://github.com/yangjingchuang/ublacklist-subscription)
+- https://github.com/arosh/ublacklist-stackoverflow-translation.git
+- https://github.com/cobaltdisco/Google-Chinese-Results-Blocklist.git
+- https://github.com/dallaslu/penzai-list.git
+- https://github.com/gyli/Blocklist.git
+- https://github.com/h-matsuo/uBlacklist-subscription-for-developer.git
+- https://github.com/littleserendipity/uBlacklist-Subscription.git
+- https://github.com/liubiantao/uBlacklist-Websites.git
+- https://github.com/nonPointer/uBlacklist-Subscription.git
+- https://github.com/Paxxs/Google-Blocklist
+- https://github.com/xNathan/uBlacklist-subscription.git
+- https://github.com/YeSilin/uBlacklist.git
+- https://github.com/youzeliang/uBlacklist-Subscription
+- https://github.com/zweie/some-rules-for-ublacklist
+- https://github.com/laylavish/uBlockOrigin-HUGE-AI-Blocklist
 
+### 推荐
 
-# [LICENSE](https://github.com/me-shaon/GLWTPL)
+推荐另一个插件：<https://github.com/danny0838/content-farm-terminator>
+
+uBlacklist 插件对百度无效。  
+如果需要百度屏蔽插件请用：<https://github.com/zhangolve/search-engine-filter>  
+
+### [LICENSE](https://github.com/me-shaon/GLWTPL)
+
 ```
-GLWT（祝你好运）公共许可证
-版权所有（C）每个人，除了作者
+GLWT（Good Luck With That，祝你好运）公共许可证
+版权所有© 每个人，除了作者
 
 任何人都被允许复制、分发、修改、合并、销售、出版、再授权或
 任何其它操作，但风险自负。
@@ -130,5 +192,5 @@ GLWT（祝你好运）公共许可证
 无论是在合同行为、侵权行为或其它因使用本软件产生的情形，作
 者不对任何索赔、损害承担责任。
 
-祝你好运及一帆风顺。
+祖宗保佑。
 ```

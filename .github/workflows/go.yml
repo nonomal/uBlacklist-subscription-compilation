@@ -1,82 +1,85 @@
-name: Update uBlacklist subcription weekly
+name: Update uBlacklist subscription weekly
 
 on:
   schedule:
-    - cron: 0 0 * * 0
+    - cron: "0 0 * * 0"
   push:
     branches: [ main ]
     
-  watch:
-    types: started
+  workflow_dispatch:
 
 jobs:
 
   build:
     name: Build
     runs-on: ubuntu-latest
-    if: github.event.repository.owner.id == github.event.sender.id
+    #if: github.event.repository.owner.id == github.event.sender.id
     steps:
 
-    - name: Set up Go 1.x
-      uses: actions/setup-go@v2
+    - name: Set up Go
+      uses: actions/setup-go@v5
       with:
-        go-version: 1.15
+        go-version: '>=1.17.0'
 
     - name: Checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
       with:
         fetch-depth: 1
-
-    - name: Setup Git
-      env:
-          MY_SECRET : ${{secrets.commit_secret}}
-      run: |
-        git config --global user.name ${{secrets.username}}
-        git config --global user.email ${{secrets.useremail}}
-        git config --global init.defaultBranch main
-
-    - name: Update source
-      run: |
-        rm -rf source
-        mkdir source
-        git clone --depth 1 https://github.com/YeSilin/uBlacklist.git source/YeSilin/uBlacklist
-        git clone --depth 1 https://github.com/cobaltdisco/Google-Chinese-Results-Blocklist.git source/cobaltdisco/Google-Chinese-Results-Blocklist
-        git clone --depth 1 https://github.com/gyli/Blocklist.git source/gyli/Blocklist
-        git clone --depth 1 https://github.com/h-matsuo/uBlacklist-subscription-for-developer.git source/h-matsuo/uBlacklist-subscription-for-developer
-        git clone --depth 1 https://github.com/littleserendipity/uBlacklist-Subscription.git source/littleserendipity/uBlacklist-Subscription
-        git clone --depth 1 https://github.com/liubiantao/uBlacklist-Websites.git source/liubiantao/uBlacklist-Websites
-        git clone --depth 1 https://github.com/nonPointer/uBlacklist-Subscription.git source/nonPointer/uBlacklist-Subscription
-        git clone --depth 1 https://github.com/scyrte/uBlacklist-Subscription.git source/scyrte/uBlacklist-Subscription
-        git clone --depth 1 https://github.com/xNathan/uBlacklist-subscription.git source/xNathan/uBlacklist-subscription
-        git clone --depth 1 https://github.com/arosh/ublacklist-stackoverflow-translation.git source/arosh/ublacklist-stackoverflow-translation
-        git clone --depth 1 https://github.com/DivineEngine/uBlacklist.git source/DivineEngine/uBlacklist
-        git clone --depth 1 https://github.com/dallaslu/penzai-list.git source/dallaslu/penzai-list
-        # git clone --depth 1 https://github.com/yangjingchuang/ublacklist-subscription.git source/yangjingchuang/ublacklist-subscription
+        submodules: true
 
     - name: Merge txt
       run: |
-        cp source/gyli/Blocklist/BLOCKLIST source/gyli/Blocklist/blocklist.txt
+        # 预处理一些数据
+        cp source/gyli/Blocklist/BLOCKLIST_uBlacklist source/gyli/Blocklist/blocklist.txt
         rm uBlacklist.txt
         rm uBlocklist.txt
         rm tools/uBlacklist_backup.txt
-        touch time.txt
-        echo " Update weekly at $(TZ=UTC-8 date +"%Y-%m-%d"" ""%T"" UTC+0800")" >> time.txt
-        find . -type f -name "*.txt" -exec cat {} \;> tools/uBlacklist
         rm source/gyli/Blocklist/blocklist.txt
-        rm time.txt
+        rm source/Paxxs/Google-Blocklist/data -rf
+        rm source/laylavish/uBlockOrigin-HUGE-AI-Blocklist/additional_list_nuclear.txt
+        rm source/laylavish/uBlockOrigin-HUGE-AI-Blocklist/list.txt
+        rm source/laylavish/uBlockOrigin-HUGE-AI-Blocklist/list_uBlacklist_nuclear.txt
+        rm source/laylavish/uBlockOrigin-HUGE-AI-Blocklist/noai_hosts.txt
+        mv reverse_url.txt tools/reverse_url
+
+        # 合并所有列表
+        find . -type f -name "*.txt" -exec sh -c 'cat "$0"; echo' {} \; > tools/uBlacklist
+
+        # Issue # 48
+        sed -i '/^http:\/\//d' source/zweie/some-rules-for-ublacklist/Annoyingbastard.txt
+
         cd tools
         mv uBlacklist uBlacklist.txt
         go run main.go
         cat -s uBlacklist.txt | sed '/^[[:space:]]*$/d'
         mv uBlacklist.txt ../uBlacklist.txt -f
         cd ..
-        cp uBlacklist.txt uBlocklist.txt -f
+
+        # 删除以 # 开头的行
+        sed -i '/^#/d' uBlacklist.txt
+
+        # 删除以 ! 开头的行
+        sed -i '/^!/d' uBlacklist.txt
+
+        cat tools/reverse_url >> uBlacklist.txt
+
+        # 添加时间
+        sed -i "1i\! Update weekly at $(TZ=UTC-8 date +'%Y-%m-%d %T %z')" uBlacklist.txt
+
+        # 去除空行
+        sed -i '/^$/d' uBlacklist.txt
+
+        ln -s uBlacklist.txt uBlocklist.txt
+        
+        # 获取当前时间存入环境变量
+        echo "CURRENT_TIME=$(TZ=UTC-8 date +'%Y-%m-%d %T %z')" >> $GITHUB_ENV
 
     - name: Commit files
-      run: |
-        git add -u
-        git reset -- source/*
-        git commit -m "ci(build): update weekly at $(TZ=UTC-8 date +"%Y-%m-%d"" ""%T"" UTC+0800")"
-        git remote set-url --add --push origin https://$MY_SECRET@github.com/eallion/uBlacklist-subscription-compilation.git
-        git push origin main -f
-        echo 🤘 Update complete.
+      uses: EndBug/add-and-commit@v9
+      with:
+        message: "ci(build): update weekly at ${{ env.CURRENT_TIME }}"
+        committer_name: 'github-actions[bot]'
+        committer_email: 'github-actions[bot]@users.noreply.github.com'
+        add: |
+          'uBlacklist.txt'
+          'tools/uBlacklist_backup.txt'

@@ -1,1 +1,11 @@
-@*://www.zhihu.com/*
+@*://*.zhihu.com/* 
+@*://*.google.com/* 
+@*://*.369369.xyz/* 
+@*://*.baiyun-hotel.com/*
+@*://*.cnblogs.com/*
+@*://*.nga.cn/*
+@*://*.right.com.cn/*
+@*://*.android.com/*
+@*://*.microsoft.com/*
+@*://*.gov.cn/*
+@*://*.freecodecamp.org/*

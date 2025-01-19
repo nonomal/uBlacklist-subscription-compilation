@@ -19,18 +19,24 @@
 [submodule "source/nonPointer/uBlacklist-Subscription"]
 	path = source/nonPointer/uBlacklist-Subscription
 	url = https://github.com/nonPointer/uBlacklist-Subscription.git
-[submodule "source/scyrte/uBlacklist-Subscription"]
-	path = source/scyrte/uBlacklist-Subscription
-	url = https://github.com/scyrte/uBlacklist-Subscription.git
 [submodule "source/xNathan/uBlacklist-subscription"]
 	path = source/xNathan/uBlacklist-subscription
 	url = https://github.com/xNathan/uBlacklist-subscription.git
 [submodule "source/arosh/ublacklist-stackoverflow-translation"]
 	path = source/arosh/ublacklist-stackoverflow-translation
 	url = https://github.com/arosh/ublacklist-stackoverflow-translation.git
-[submodule "source/DivineEngine/uBlacklist"]
-	path = source/DivineEngine/uBlacklist
-	url = https://github.com/DivineEngine/uBlacklist.git
 [submodule "source/dallaslu/penzai-list"]
 	path = source/dallaslu/penzai-list
 	url = https://github.com/dallaslu/penzai-list.git
+[submodule "source/eallion/uBlacklist-Subscription"]
+	path = source/eallion/uBlacklist-Subscription
+	url = https://github.com/eallion/uBlacklist-Subscription.git
+[submodule "source/zweie/some-rules-for-ublacklist"]
+	path = source/zweie/some-rules-for-ublacklist
+	url = https://github.com/zweie/some-rules-for-ublacklist
+[submodule "source/Paxxs/Google-Blocklist"]
+	path = source/Paxxs/Google-Blocklist
+	url = https://github.com/Paxxs/Google-Blocklist
+[submodule "source/laylavish/uBlockOrigin-HUGE-AI-Blocklist"]
+	path = source/laylavish/uBlockOrigin-HUGE-AI-Blocklist
+	url = https://github.com/laylavish/uBlockOrigin-HUGE-AI-Blocklist
